@@ -1,15 +1,18 @@
+import { ThemeToggle } from "@/components/theme-toggle";
+
 export function Topbar({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <header className="flex items-center justify-between border-b border-slate-200 bg-white px-8 py-5">
+    <header className="flex items-center justify-between border-b border-card-border bg-card px-8 py-5">
       <div>
-        <h1 className="text-lg font-semibold text-slate-900">{title}</h1>
-        {subtitle && <p className="text-sm text-slate-500">{subtitle}</p>}
+        <h1 className="text-lg font-semibold text-foreground">{title}</h1>
+        {subtitle && <p className="text-sm text-muted">{subtitle}</p>}
       </div>
       <div className="flex items-center gap-3">
-        <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800">
+        <span className="rounded-full bg-brand-gold/15 px-3 py-1 text-xs font-medium text-brand-gold">
           Ambiente de demonstração · Estilo Camisetas Ltda
         </span>
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-200 text-sm font-semibold text-slate-700">
+        <ThemeToggle />
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted-bg text-sm font-semibold text-foreground">
           EC
         </div>
       </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Sidebar } from "@/components/sidebar";
 
@@ -14,17 +15,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ERP Modular — Demonstração",
+  title: "AXIS — Estrutura Comercial Inteligente",
   description: "ERP modular, genérico, com dados de demonstração",
 };
+
+// Aplica o tema salvo antes da primeira pintura da página, evitando o
+// "flash" de tema claro seguido de escuro (ou vice-versa) ao carregar.
+const themeInitScript = `
+  (function () {
+    var stored = localStorage.getItem("axis-theme");
+    var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (stored ? stored === "dark" : prefersDark) {
+      document.documentElement.classList.add("dark");
+    }
+  })();
+`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex h-full min-h-screen bg-slate-50">
+      <body className="flex h-full min-h-screen bg-background text-foreground">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         <Sidebar />
         <div className="flex min-w-0 flex-1 flex-col">{children}</div>
       </body>
