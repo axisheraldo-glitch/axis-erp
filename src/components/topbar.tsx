@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LogoutButton } from "@/components/logout-button";
 
 export function Topbar({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
@@ -12,6 +13,7 @@ export function Topbar({ title, subtitle }: { title: string; subtitle?: string }
           Ambiente de demonstração · Estilo Camisetas Ltda
         </span>
         <ThemeToggle />
+        <LogoutButton />
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted-bg text-sm font-semibold text-foreground">
           EC
         </div>
