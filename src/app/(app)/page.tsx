@@ -1,13 +1,19 @@
 import { Topbar } from "@/components/topbar";
 import { StatCard } from "@/components/stat-card";
 import { StatusBadge } from "@/components/status-badge";
-import { clientes, produtos, pedidos, valorPedido, clientePorId, formatDataBR } from "@/lib/demo-data";
+import { getClientes, getProdutos, getPedidos, valorPedido, formatDataBR } from "@/lib/data";
 
 function formatBRL(v: number) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const [clientes, produtos, pedidos] = await Promise.all([
+    getClientes(),
+    getProdutos(),
+    getPedidos(),
+  ]);
+
   const clientesAtivos = clientes.filter((c) => c.status === "Ativo").length;
   const produtosBaixoEstoque = produtos.filter((p) => p.estoque < 20).length;
   const pedidosAtivos = pedidos.filter((p) => p.status !== "Cancelado");
@@ -43,7 +49,7 @@ export default function DashboardPage() {
               {pedidos.map((p) => (
                 <tr key={p.id} className="border-t border-card-border">
                   <td className="px-5 py-3 font-medium text-foreground">{p.numero}</td>
-                  <td className="px-5 py-3 text-muted">{clientePorId(p.clienteId)?.nome}</td>
+                  <td className="px-5 py-3 text-muted">{p.cliente?.nome}</td>
                   <td className="px-5 py-3 text-muted">{formatDataBR(p.data)}</td>
                   <td className="px-5 py-3">
                     <StatusBadge status={p.status} />

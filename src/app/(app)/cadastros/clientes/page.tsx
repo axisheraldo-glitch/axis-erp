@@ -1,7 +1,9 @@
 import { Topbar } from "@/components/topbar";
-import { clientes } from "@/lib/demo-data";
+import { getClientes } from "@/lib/data";
 
-export default function ClientesPage() {
+export default async function ClientesPage() {
+  const clientes = await getClientes();
+
   return (
     <>
       <Topbar title="Clientes" subtitle="Cadastros Mestres" />

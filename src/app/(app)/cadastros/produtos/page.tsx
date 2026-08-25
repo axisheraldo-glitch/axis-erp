@@ -1,11 +1,13 @@
 import { Topbar } from "@/components/topbar";
-import { produtos } from "@/lib/demo-data";
+import { getProdutos } from "@/lib/data";
 
 function formatBRL(v: number) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-export default function ProdutosPage() {
+export default async function ProdutosPage() {
+  const produtos = await getProdutos();
+
   return (
     <>
       <Topbar title="Produtos" subtitle="Cadastros Mestres" />
