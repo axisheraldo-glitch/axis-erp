@@ -19,14 +19,14 @@ export function Sidebar() {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          className="fixed inset-0 z-40 bg-black/50"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col bg-brand-dark text-slate-200 transition-transform duration-200 md:static md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col bg-brand-dark text-slate-200 transition-transform duration-200 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -38,7 +38,7 @@ export function Sidebar() {
           <button
             onClick={() => setOpen(false)}
             aria-label="Fechar menu"
-            className="text-slate-400 hover:text-white md:hidden"
+            className="text-slate-400 hover:text-white"
           >
             <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" className="h-5 w-5">
               <path strokeLinecap="round" d="M18 6 6 18M6 6l12 12" />

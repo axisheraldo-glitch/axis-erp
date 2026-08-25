@@ -6,6 +6,11 @@ export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // Sincroniza com o tema já aplicado ao <html> pelo script inline
+    // (ver theme-init em layout.tsx) antes da hidratação. Servidor sempre
+    // renderiza o ícone "claro" por não ter acesso ao DOM; isso corrige
+    // para o valor real assim que o componente monta no cliente.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
